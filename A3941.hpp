@@ -25,6 +25,8 @@ class A3941 {
 
     public:
 
+    bool motorInvertido = false;
+
     /**
      * @brief Método construtor que configura o motor.
      * 
@@ -67,6 +69,12 @@ class A3941 {
      * @param potencia Valor da potência, na qual varia no intervalo [-valorMaximoDePotencia, valorMaximoDePotencia], para aplicar no motor. Para valores positivos o motor gira em um sentido, para valores negativos o motor gira no sentido contrário.
      */
     void setPotencia(int potencia) {
+
+        // Se o motor estiver invertido, inverte o valor da potência
+        if (motorInvertido) {
+            potencia = -potencia;
+        }
+
         // Se a potência passada for positiva, escreve esse valor no canal do pino PWMH e escreve LOW no pino PHASE do driver de motor
         if (potencia > 0) {
             ledcWrite(_canalDoPinoPWMH, potencia);
