@@ -38,16 +38,14 @@ class A3941 {
      * @param resolucao Número de bits da resolução do sinal PWM. Por exemplo, uma resolução de 12 bits significa que o valor de PWM varia no intervalo [0, 4095] (2¹² = 4096 níveis de controle).
      * @param inversao Se o motor deve ser invertido ou não
      */
-    A3941(int pinoPWML, int pinoPWMH, int pinoPHASE, int canalDoPinoPWMH, int frequenciaDoSinalDePWM, int resolucao, bool inversao):
+    A3941(int pinoPWML, int pinoPWMH, int pinoPHASE, int canalDoPinoPWMH, int frequenciaDoSinalDePWM, int resolucao):
         // Atribui os valores passados nos atributos
         _pinoPHASE(pinoPHASE),
         _canalDoPinoPWMH(canalDoPinoPWMH),
 
         // Calcula o valor máximo de potência do motor a partir da resolução
-        _valorMaximoDePotencia(pow(2, resolucao) - 1),
+        _valorMaximoDePotencia(pow(2, resolucao) - 1)
 
-        // atribuindo a variável que inverte o sentido do motor
-        motorInvertido(inversao)
 
     {
         // Configura o canal que gera o sinal PWM
@@ -125,4 +123,11 @@ class A3941 {
     int getPotencia() {
         return _potencia;
     }
+    void setCanal(int novoCanalDoPinoPWMH){
+        _canalDoPinoPWMH = novoCanalDoPinoPWMH;
+    }
 };
+
+
+
+
