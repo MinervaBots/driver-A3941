@@ -36,7 +36,6 @@ class A3941 {
      * @param canalDoPinoPWMH Canal de PWM do pino PWMH do driver;
      * @param frequenciaDoSinalDePWM Frequência do sinal PWM;
      * @param resolucao Número de bits da resolução do sinal PWM. Por exemplo, uma resolução de 12 bits significa que o valor de PWM varia no intervalo [0, 4095] (2¹² = 4096 níveis de controle).
-     * @param inversao Se o motor deve ser invertido ou não
      */
     A3941(int pinoPWML, int pinoPWMH, int pinoPHASE, int canalDoPinoPWMH, int frequenciaDoSinalDePWM, int resolucao):
         // Atribui os valores passados nos atributos
