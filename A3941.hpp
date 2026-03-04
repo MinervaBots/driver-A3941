@@ -11,14 +11,17 @@ class A3941 {
     private:
 
     // Atributo que armazena o pino PHASE do driver de motor
-    int _pinoPHASE;
+    uint8_t _pinoPHASE;
 
     // Atributo que armazena o canal utilizado pelo pino PWMH do driver de motor
     // Esse canal é responsável por gerar o sinal PWM
-    int _canalDoPinoPWMH;
+    uint8_t _canalDoPinoPWMH;
 
-    // Atributo que armazena o valor máximo de potência do motor
-    int _valorMaximoDePotencia;
+    // Atributo que armazena o número de bits da resolução do sinal PWM
+    uint8_t _resolucao;
+
+    // Calcula o valor máximo de potência do motor a partir da resolução
+    uint32_t _valorMaximoDePotencia = (1 << _resolucao) - 1;
 
     // Atributo que armazena o valor da potêncial atual do motor
     int _potencia = 0;
@@ -37,15 +40,11 @@ class A3941 {
      * @param frequenciaDoSinalDePWM Frequência do sinal PWM;
      * @param resolucao Número de bits da resolução do sinal PWM. Por exemplo, uma resolução de 12 bits significa que o valor de PWM varia no intervalo [0, 4095] (2¹² = 4096 níveis de controle).
      */
-    A3941(int pinoPWML, int pinoPWMH, int pinoPHASE, int canalDoPinoPWMH, int frequenciaDoSinalDePWM, int resolucao):
+    A3941(uint8_t pinoPWML, uint8_t pinoPWMH, uint8_t pinoPHASE, uint8_t canalDoPinoPWMH, uint32_t frequenciaDoSinalDePWM, uint8_t resolucao) :
         // Atribui os valores passados nos atributos
         _pinoPHASE(pinoPHASE),
         _canalDoPinoPWMH(canalDoPinoPWMH),
-
-        // Calcula o valor máximo de potência do motor a partir da resolução
-        _valorMaximoDePotencia(pow(2, resolucao) - 1)
-
-
+        _resolucao(resolucao)
     {
         // Configura o canal que gera o sinal PWM
         ledcSetup(_canalDoPinoPWMH, frequenciaDoSinalDePWM, resolucao);
@@ -110,7 +109,7 @@ class A3941 {
      * 
      * @return O valor máximo de potência do motor.
      */
-    int getValorMaximoDePotencia() {
+    uint32_t getValorMaximoDePotencia() const {
         return _valorMaximoDePotencia;
     }
 
@@ -119,14 +118,11 @@ class A3941 {
      * 
      * @return O valor da potência atual do motor.
      */
-    int getPotencia() {
+    int getPotencia() const {
         return _potencia;
     }
-    void setCanal(int novoCanalDoPinoPWMH){
+
+    void setCanal(uint8_t novoCanalDoPinoPWMH){
         _canalDoPinoPWMH = novoCanalDoPinoPWMH;
     }
 };
-
-
-
-
