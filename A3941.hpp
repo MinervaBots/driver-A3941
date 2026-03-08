@@ -194,7 +194,7 @@ public:
     }
 
     void setCanal(uint8_t novoCanalDoPinoPWMH){
-        _canalDoPinoPWMH = static_cast<ledc_channel_t>(novoCanalDoPinoPWMH);
+        setCanalPWM(novoCanalDoPinoPWMH);
     }
 
     /**
@@ -222,4 +222,5 @@ public:
 
         parar(); // Garante que o motor comece parado
     }
+
 };
