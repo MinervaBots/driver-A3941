@@ -130,7 +130,7 @@ public:
     A3941(uint8_t pinoPWML, uint8_t pinoPWMH, uint8_t pinoPHASE, uint8_t canalDoPinoPWMH) :
         // Atribui os valores passados nos atributos
         _pinoPWML(static_cast<gpio_num_t>(pinoPWML)),
-        _pinoPWMH(static_cast<gpio_num_t>(pinoPWMH)),
+        _pinoPWMH(pinoPWMH),
         _pinoPHASE(static_cast<gpio_num_t>(pinoPHASE))
     {
         setCanalPWM(canalDoPinoPWMH);
