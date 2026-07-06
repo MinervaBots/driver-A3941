@@ -193,6 +193,11 @@ public:
         return ledc_get_duty(modoPWM, _canalDoPinoPWMH);
     }
 
+    /**
+     * @brief Método para alterar o canal de PWM do pino PWMH do driver de motor
+     * 
+     * @param novoCanalDoPinoPWMH Canal de PWM do pino PWMH do driver, valor entre [0, 15] se tiver suporte para HIGH SPEED, se não, [0, 7]
+     */
     void setCanal(uint8_t novoCanalDoPinoPWMH){
         setCanalPWM(novoCanalDoPinoPWMH);
     }
